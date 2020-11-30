@@ -1,4 +1,4 @@
-package Query;
+package query;
 
 import fileio.ActorInputData;
 
@@ -10,10 +10,13 @@ import java.util.List;
 public class Filter_description {
     private final List<ActorInputData> actors;
     private final List<String> keywords;
+    private final String sort_type;
 
-    public Filter_description(List<ActorInputData> actors, List<String> keywords) {
+    public Filter_description(List<ActorInputData> actors, List<String> keywords,
+                              String sort_type) {
         this.actors = actors;
         this.keywords = keywords;
+        this.sort_type = sort_type;
     }
 
     public List<String> actors_name () {
@@ -35,6 +38,9 @@ public class Filter_description {
     public String solve_filter_description(List<String> name, List<String> description) {
         List<String> searched_actors = new LinkedList<>();
         for (int i = 0; i < name.size(); i++) {
+            description.set(i, description.get(i).replace(",", " "));
+            description.set(i, description.get(i).replace("-", " "));
+            description.set(i, description.get(i).replace(".", " "));
             description.set(i, description.get(i).toLowerCase());
             boolean ok = true;
             for (String keyword : keywords) {
@@ -48,6 +54,9 @@ public class Filter_description {
             }
         }
         Collections.sort(searched_actors);
+        if (sort_type.equals("desc")) {
+            Collections.reverse(searched_actors);
+        }
         StringBuilder message = new StringBuilder();
         boolean ok = false;
         for (String searched_actor : searched_actors) {

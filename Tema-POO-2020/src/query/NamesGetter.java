@@ -1,4 +1,4 @@
-package Query;
+package query;
 
 import fileio.MovieInputData;
 import fileio.SerialInputData;
@@ -12,7 +12,8 @@ public class Names_getter {
     final List<MovieInputData> movies;
     final List<SerialInputData> serials;
 
-    public Names_getter(List<String> years, List<String> genres, List<MovieInputData> movies, List<SerialInputData> serials) {
+    public Names_getter(List<String> years, List<String> genres,
+                        List<MovieInputData> movies, List<SerialInputData> serials) {
         this.years = years;
         this.genres = genres;
         this.movies = movies;
@@ -30,7 +31,9 @@ public class Names_getter {
                     }
                 }
 
-                if ((genres_size == 0 || genres.get(0) == null) && (years.contains(String.valueOf(movie.getYear())) || years.get(0) == null)) {
+                if ((genres_size == 0 || genres.get(0) == null)
+                        && (years.contains(String.valueOf(movie.getYear()))
+                        || years.get(0) == null)) {
                     names.add(movie.getTitle());
                 }
 
@@ -44,7 +47,9 @@ public class Names_getter {
                     }
                 }
 
-                if ((genres_size == 0 || genres.get(0) == null) && (years.contains(String.valueOf(serial.getYear())) || years.get(0) == null)) {
+                if ((genres_size == 0 || genres.get(0) == null)
+                        && (years.contains(String.valueOf(serial.getYear()))
+                        || years.get(0) == null)) {
                     names.add(serial.getTitle());
                 }
             }
@@ -55,7 +60,8 @@ public class Names_getter {
     public void sort_names_desc (List<String> names, List<Integer> numbers) {
         for (int i = 0; i < names.size() - 1; i++) {
             for (int j = i + 1; j < names.size(); j++) {
-                if ((numbers.get(i) < numbers.get(j)) || (numbers.get(i).equals(numbers.get(j)) && names.get(i).compareTo(names.get(j)) < 0)) {
+                if ((numbers.get(i) < numbers.get(j)) || (numbers.get(i).equals(numbers.get(j))
+                        && names.get(i).compareTo(names.get(j)) < 0)) {
                     int aux_int = numbers.get(i);
                     numbers.set(i, numbers.get(j));
                     numbers.set(j, aux_int);

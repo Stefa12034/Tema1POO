@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 public class Rating {
     private final String username;
     private final String title;
@@ -17,7 +18,9 @@ public class Rating {
     private final List<SerialInputData> serials;
     private final List<UserInputData> users;
 
-    public Rating(String username, String title, double rating, int season, List<MovieInputData> movies, List<SerialInputData> serials, List<UserInputData> users) {
+    public Rating(String username, String title, double rating, int season,
+                  List<MovieInputData> movies, List<SerialInputData> serials,
+                  List<UserInputData> users) {
         this.username = username;
         this.title = title;
         this.rating = rating;
@@ -35,8 +38,8 @@ public class Rating {
             if (user.getUsername().equals(username)) {
                 if (user.getHistory().containsKey(title)) {
                     if (serials == null) {
-                        if (!user.getUser_ratings().containsKey(title)) {
-                            user.give_rating(title, rating);
+                        if (!user.getUserMovieRatings().containsKey(title)) {
+                            user.giveRating(title, rating);
                             for (MovieInputData movie : movies) {
                                 if (movie.getTitle().equals(title)) {
                                     List<Double> ratings = movie.getRatings();
@@ -45,36 +48,46 @@ public class Rating {
                                     break;
                                 }
                             }
-                            message = "success -> " + title + " was rated with " + rating + " by " + user.getUsername();
+                            message = "success -> " + title + " was rated with " + rating
+                                    + " by " + user.getUsername();
                         } else {
                             message = "error -> " + title + " has been already rated";
                         }
                     } else {
                         for (SerialInputData serial : serials) {
                             if (serial.getTitle().equals(title)) {
-                                if (!user.getUser_season_ratings().containsKey(title)) {
-                                    List<Double> ratings = serial.getSeasons().get(season - 1).getRatings();
+                                if (!user.getUserSerialRatings().containsKey(title)) {
+                                    List<Double> ratings
+                                            = serial.getSeasons().get(season - 1).getRatings();
                                     ratings.add(rating);
                                     serial.getSeasons().get(season - 1).setRatings(ratings);
-                                    ArrayList<Double> array = new ArrayList<>(serial.getNumberSeason() + 1);
+                                    ArrayList<Double> array
+                                            = new ArrayList<>(serial.getNumberSeason() + 1);
                                     for (int k = 0; k < serial.getNumberSeason() + 1; k++) {
                                         array.add((double) 0);
                                     }
                                     array.set(season, rating);
-                                    Map<String, ArrayList<Double>> map = user.getUser_season_ratings();
+                                    Map<String, ArrayList<Double>> map
+                                            = user.getUserSerialRatings();
                                     map.put(title, array);
-                                    user.setUser_season_ratings(map);
-                                    message = "success -> " + title + " was rated with " + rating + " by " + user.getUsername();
+                                    user.setUserSerialRatings(map);
+                                    message = "success -> " + title + " was rated with " + rating
+                                            + " by " + user.getUsername();
                                 } else {
-                                    if (user.getUser_season_ratings().get(title).get(season) == (double) 0) {
-                                        List<Double> ratings = serial.getSeasons().get(season - 1).getRatings();
+                                    if (user.getUserSerialRatings().get(title).get(season)
+                                            == (double) 0) {
+                                        List<Double> ratings
+                                                = serial.getSeasons().get(season - 1).getRatings();
                                         ratings.add(rating);
                                         serial.getSeasons().get(season - 1).setRatings(ratings);
-                                        ArrayList<Double> array = user.getUser_season_ratings().get(title);
-                                        Map<String, ArrayList<Double>> map = user.getUser_season_ratings();
+                                        ArrayList<Double> array
+                                                = user.getUserSerialRatings().get(title);
+                                        Map<String, ArrayList<Double>> map
+                                                = user.getUserSerialRatings();
                                         map.put(title, array);
-                                        user.setUser_season_ratings(map);
-                                        message = "success -> " + title + " was rated with " + rating + " by " + user.getUsername();
+                                        user.setUserSerialRatings(map);
+                                        message = "success -> " + title + " was rated with "
+                                                + rating + " by " + user.getUsername();
                                     } else {
                                         message = "error -> " + title + " has been already rated";
                                     }

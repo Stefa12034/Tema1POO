@@ -1,4 +1,4 @@
-package Query;
+package query;
 
 import fileio.MovieInputData;
 import fileio.SerialInputData;
@@ -14,7 +14,9 @@ public class Number_of_ratings extends Names_getter{
     private final int number;
     private final String sort_type;
 
-    public Number_of_ratings(List<String> years, List<String> genres, List<MovieInputData> movies, List<SerialInputData> serials, List<UserInputData> users, int number, String sort_type) {
+    public Number_of_ratings(List<String> years, List<String> genres, List<MovieInputData> movies,
+                             List<SerialInputData> serials, List<UserInputData> users, int number,
+                             String sort_type) {
         super(years, genres, movies, serials);
         this.users = users;
         this.number = number;
@@ -26,7 +28,7 @@ public class Number_of_ratings extends Names_getter{
         List<Integer> num_ratings = new LinkedList<>();
         for (UserInputData user : users) {
             names.add(user.getUsername());
-            num_ratings.add(user.getUser_ratings().size() + user.getUser_season_ratings().size());
+            num_ratings.add(user.getUserMovieRatings().size() + user.getUserSerialRatings().size());
         }
 
         sort_names_desc(names, num_ratings);

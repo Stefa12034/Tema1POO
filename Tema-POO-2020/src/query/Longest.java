@@ -12,7 +12,8 @@ public class Longest  extends Names_getter{
     private final Integer number;
     private final String sort;
 
-    public Longest(List<String> years, List<String> genres, List<MovieInputData> movies, List<SerialInputData> serials, Integer number, String sort) {
+    public Longest(List<String> years, List<String> genres, List<MovieInputData> movies,
+                   List<SerialInputData> serials, Integer number, String sort) {
         super(years, genres, movies, serials);
         this.number = number;
         this.sort = sort;
@@ -38,7 +39,8 @@ public class Longest  extends Names_getter{
                 for (SerialInputData serial : serials) {
                     if (names.get(i).equals(serial.getTitle())) {
                         for (int k = 0; k < serial.getSeasons().size(); k++) {
-                            durations.set(i, durations.get(i) + serial.getSeasons().get(k).getDuration());
+                            durations.set(i, durations.get(i)
+                                    + serial.getSeasons().get(k).getDuration());
                         }
                     }
                 }

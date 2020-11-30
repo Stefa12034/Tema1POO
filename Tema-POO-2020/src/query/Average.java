@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class Average {
 
     private final List<ActorInputData> actor;
@@ -16,7 +17,8 @@ public class Average {
     private final int number;
     private final String sort_type;
 
-    public Average(List<ActorInputData> actor, List<MovieInputData> movies, List<SerialInputData> serials, int number, String sort_type) {
+    public Average(List<ActorInputData> actor, List<MovieInputData> movies,
+                   List<SerialInputData> serials, int number, String sort_type) {
         this.actor = actor;
         this.movies = movies;
         this.serials = serials;
@@ -51,7 +53,8 @@ public class Average {
                             for (int p = 0; p < serial.getSeasons().size(); p++) {
                                 double rating_season = 0;
                                 int season_rating_increment = 0;
-                                for (int h = 0; h < serial.getSeasons().get(p).getRatings().size(); h++) {
+                                for (int h = 0; h < serial.getSeasons().get(p).getRatings().size();
+                                     h++) {
                                     rating_season += serial.getSeasons().get(p).getRatings().get(h);
                                     season_rating_increment++;
                                 }
@@ -78,7 +81,8 @@ public class Average {
         for (j = 0; j < actors.size() - 1; j++) {
             for (k = j + 1; k < actors.size(); k++) {
                 if ((avarage_ratings.get(j) > avarage_ratings.get(k)) ||
-                        (avarage_ratings.get(j).equals(avarage_ratings.get(k)) && actors.get(j).compareTo(actors.get(k)) > 0)) {
+                        (avarage_ratings.get(j).equals(avarage_ratings.get(k))
+                                && actors.get(j).compareTo(actors.get(k)) > 0)) {
                     double aux = avarage_ratings.get(j);
                     avarage_ratings.set(j, avarage_ratings.get(k));
                     avarage_ratings.set(k, aux);

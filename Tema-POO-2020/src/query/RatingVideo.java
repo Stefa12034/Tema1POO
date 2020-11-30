@@ -1,4 +1,4 @@
-package Query;
+package query;
 
 import fileio.MovieInputData;
 import fileio.SerialInputData;
@@ -12,7 +12,8 @@ public class Rating_video extends Names_getter{
     private final int number;
     private final String sort_type;
 
-    public Rating_video(List<String> years, List<String> genres, List<MovieInputData> movies, List<SerialInputData> serials, int number, String sort_type) {
+    public Rating_video(List<String> years, List<String> genres, List<MovieInputData> movies,
+                        List<SerialInputData> serials, int number, String sort_type) {
         super(years, genres, movies, serials);
         this.number = number;
         this.sort_type = sort_type;
